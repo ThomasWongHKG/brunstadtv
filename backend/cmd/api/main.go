@@ -34,6 +34,7 @@ import (
 	"github.com/samber/lo"
 	"go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin"
 	"go.opentelemetry.io/otel"
+	"os"
 	"strings"
 	"time"
 )
@@ -242,6 +243,18 @@ func main() {
 	r.POST("/admin", adminGraphqlHandler(config, db, queries, loaders))
 
 	log.L.Debug().Msgf("connect to http://localhost:%s/ for GraphQL playground", config.Port)
+
+	// Revision for comparing active instance to code version
+	revision, _ := os.ReadFile(os.Getenv("REVISION_SHA_PATH"))
+	revisionString := strings.TrimSpace(string(revision))
+
+	if revisionString == "" {
+		revisionString = "unknown"
+	}
+
+	r.GET("/revision", func(ctx *gin.Context) {
+		ctx.String(200, revisionString)
+	})
 
 	span.End()
 
