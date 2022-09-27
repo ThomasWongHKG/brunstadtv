@@ -535,6 +535,7 @@ type Episode struct {
 	Type                     string                `db:"type" json:"type"`
 	UserCreated              uuid.NullUUID         `db:"user_created" json:"userCreated"`
 	UserUpdated              uuid.NullUUID         `db:"user_updated" json:"userUpdated"`
+	ParentID                 null_v4.Int           `db:"parent_id" json:"parentID"`
 }
 
 type EpisodesCategory struct {
