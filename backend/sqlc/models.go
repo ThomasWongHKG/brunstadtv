@@ -203,6 +203,14 @@ type CollectionsItem struct {
 	UserUpdated  uuid.NullUUID  `db:"user_updated" json:"userUpdated"`
 }
 
+type DataTranslation struct {
+	ID         uuid.UUID `db:"id" json:"id"`
+	Collection string    `db:"collection" json:"collection"`
+	ItemID     int32     `db:"item_id" json:"itemID"`
+	Field      string    `db:"field" json:"field"`
+	Value      string    `db:"value" json:"value"`
+}
+
 type DirectusActivity struct {
 	ID         int32          `db:"id" json:"id"`
 	Action     string         `db:"action" json:"action"`
