@@ -1,8 +1,7 @@
 import { Directus } from '@directus/sdk';
 import { BTVTypes } from './types'
 import { faker } from '@faker-js/faker';
-
-const directus = new Directus<BTVTypes>(process.env.DU_HOST, {});
+import { directus } from './common';
 
 function getRandomDate() {
 	let date = new Date()
